@@ -26,16 +26,9 @@ if [ ! -z "$MYSQL_RANDOM_ROOT_PASSWORD" ]; then
     echo "GENERATED ROOT PASSWORD: $MYSQL_ROOT_PASSWORD"
 fi
 
-if [ -d /var/www/localhost/htdocs/app ]; then 
-    chmod -Rf 755 /var/www/localhost/htdocs/app
-fi;
-
-if [ -d /var/www/localhost/htdocs/web ]; then 
-    chmod -Rf 755 /var/www/localhost/htdocs/web
-fi;
-
-if [ -d /var/www/localhost/htdocs/main/default_course_document/images ]; then 
-    chmod -Rf 755 /var/www/localhost/htdocs/main/default_course_document/images
+if [ -d /var/www/localhost/htdocs ]; then 
+    chmod -Rf 755 /var/www/localhost/htdocs
+    chown -R apache:apache /var/www/localhost/htdocs
 fi;
 
 tfile=`mktemp`
@@ -57,5 +50,5 @@ EOF
 rm -f $tfile
 
 # start mysql
-# nohup mysqld_safe --skip-grant-tables --bind-address 0.0.0.0 --user mysql > /dev/null 2>&1 &
+#nohup mysqld_safe --skip-grant-tables --bind-address 0.0.0.0 --user mysql > /dev/null 2>&1 &
 exec /usr/bin/mysqld --user=root --bind-address=0.0.0.0
