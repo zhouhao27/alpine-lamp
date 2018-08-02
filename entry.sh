@@ -26,6 +26,18 @@ if [ ! -z "$MYSQL_RANDOM_ROOT_PASSWORD" ]; then
     echo "GENERATED ROOT PASSWORD: $MYSQL_ROOT_PASSWORD"
 fi
 
+if [ -d /var/www/localhost/htdocs/app ]; then 
+    chmod -Rf 755 /var/www/localhost/htdocs/app
+fi;
+
+if [ -d /var/www/localhost/htdocs/web ]; then 
+    chmod -Rf 755 /var/www/localhost/htdocs/web
+fi;
+
+if [ -d /var/www/localhost/htdocs/main/default_course_document/images ]; then 
+    chmod -Rf 755 /var/www/localhost/htdocs/main/default_course_document/images
+fi;
+
 tfile=`mktemp`
 if [ ! -f "$tfile" ]; then
     return 1
