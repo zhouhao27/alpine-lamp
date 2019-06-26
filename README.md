@@ -47,3 +47,12 @@ If missing libs please let me know or create a pull request
 ## Repos
 https://hub.docker.com/r/glats/alpine-lamp  
 https://github.com/glats/alpine-lamp
+
+## TODO:
+
+- Share mysql data to locally
+- Loading slow
+- /backend Not found
+- Any link Not found
+
+
