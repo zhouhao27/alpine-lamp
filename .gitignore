@@ -1,1 +1,6 @@
 .history/
+.DS_Store
+/.vscode
+/data/*
+/logs/*
+/www/*

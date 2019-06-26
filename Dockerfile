@@ -1,7 +1,8 @@
 FROM alpine:3.9
 ENV TIMEZONE America/Santiago
 RUN apk update && apk upgrade
-RUN apk add mariadb mariadb-client \
+RUN apk add --no-cache \
+    mariadb mariadb-client \
     apache2 \ 
     apache2-utils \
     curl wget vim htop \
@@ -28,7 +29,9 @@ RUN apk add mariadb mariadb-client \
     php7-mbstring \
     php7-apcu \
     php7-opcache \
-    php7-tokenizer
+    php7-tokenizer \
+    fish \
+    vim
 
 RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin --filename=composer
@@ -58,7 +61,6 @@ RUN sed -i 's#display_errors = Off#display_errors = On#' /etc/php7/php.ini && \
     sed -i 's#session.cookie_httponly =#session.cookie_httponly = true#' /etc/php7/php.ini && \
     sed -i 's#error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT#error_reporting = E_ALL#' /etc/php7/php.ini
 
-
 # Configure xdebug
 RUN echo "zend_extension=xdebug.so" > /etc/php7/conf.d/xdebug.ini && \ 
     echo -e "\n[XDEBUG]"  >> /etc/php7/conf.d/xdebug.ini && \ 
@@ -66,6 +68,16 @@ RUN echo "zend_extension=xdebug.so" > /etc/php7/conf.d/xdebug.ini && \
     echo "xdebug.remote_connect_back=1" >> /etc/php7/conf.d/xdebug.ini && \ 
     echo "xdebug.idekey=PHPSTORM" >> /etc/php7/conf.d/xdebug.ini && \ 
     echo "xdebug.remote_log=\"/tmp/xdebug.log\"" >> /etc/php7/conf.d/xdebug.ini
+
+# Install phpmyadmin
+# RUN cd /var/www/localhost && \
+#      wget https://files.phpmyadmin.net/phpMyAdmin/4.8.4/phpMyAdmin-4.8.4-all-languages.tar.gz && \
+#      tar -xzvf phpMyAdmin-4.8.4-all-languages.tar.gz && \ 
+#      mv phpMyAdmin-4.8.4-all-languages phpMyAdmin && \
+#      rm phpMyAdmin-4.8.4-all-languages.tar.gz && \
+#      # Create virtual host in /etc/apache2/conf.d/phpmyadmin.conf
+#      touch /etc/apache2/conf.d/phpmyadmin.conf && \
+#      echo 'Listen 8080\n<VirtualHost 127.0.0.1:8080>\nServerName www.example.com\nDocumentRoot "/var/www/localhost/phpmyadmin"\n</VirtualHost>\n' >> /etc/apache2/conf.d/phpmyadmin.conf
 
 COPY entry.sh /entry.sh
 
