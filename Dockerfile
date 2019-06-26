@@ -29,6 +29,7 @@ RUN apk add --no-cache \
     php7-mbstring \
     php7-apcu \
     php7-opcache \
+    php7-fileinfo \
     php7-tokenizer \
     fish \
     vim
