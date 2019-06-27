@@ -50,7 +50,7 @@ https://github.com/glats/alpine-lamp
 
 ## TODO:
 
-- Share mysql data to locally
+- Share mysql data to locally (Can't do it right now because the data will be deleted)
 - Loading slow
 - /backend Not found
 - Any link Not found
