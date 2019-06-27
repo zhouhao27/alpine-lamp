@@ -50,7 +50,7 @@ https://github.com/glats/alpine-lamp
 
 ## TODO:
 
-- Share mysql data to locally (Can't do it right now because the data will be deleted)
+- Share mysql data to locally (Can't do it right now because the data will be deleted if using local path volume. If using named volume it will sync container's folder but can't find in host)
 - Loading slow
 - /backend Not found
 - Any link Not found
